@@ -1,7 +1,6 @@
 add_rules("mode.debug", "mode.release")
-add_requires("imgui 1.88", {configs = {glfw_opengl3 = true}})
+set_languages("c++20")
 
-target("imgui-demo")
+target("RosefinchEditor")
     set_kind("binary")
-    add_files("Code/Editor/main.cpp")
-    add_packages("imgui")
+    includes("Code")
