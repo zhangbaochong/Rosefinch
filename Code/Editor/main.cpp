@@ -1,5 +1,6 @@
 #include <iostream>
 import Editor;
+import Log;
 
 int main(int argv, char** argc)
 {
