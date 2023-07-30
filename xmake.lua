@@ -3,3 +3,4 @@ set_languages("c++20")
 set_project("Rosefinch")
 
 includes("Code")
+add_includedirs("Code/")

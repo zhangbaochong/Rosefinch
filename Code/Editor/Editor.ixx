@@ -2,7 +2,6 @@ module;
 
 export module Editor;
 import <iostream>;
-import Log;
 
 namespace Rosefinch
 {
@@ -15,9 +14,6 @@ namespace Rosefinch
         void Run()
         {
             std::cout << "Editor Run" << std::endl;
-
-            Log log;
-            log.log();
         }
     };
 }
