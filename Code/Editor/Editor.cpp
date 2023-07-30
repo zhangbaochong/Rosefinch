@@ -1,4 +1,5 @@
 #include "Editor.h"
+#include "Framework/Core/Log/Log.h"
 
 namespace Rosefinch
 {
@@ -8,6 +9,6 @@ namespace Rosefinch
 
     void Editor::Run()
     {
-        std::cout << "Editor Run" << std::endl;
+        LOG_DEBUG("start editor");
     }
 }
