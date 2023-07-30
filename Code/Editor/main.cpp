@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Framework/Core/Log/Log.h"
-import Editor;
+#include "Editor.h"
 
 int main(int argv, char** argc)
 {
