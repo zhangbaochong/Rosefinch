@@ -1,5 +1,6 @@
 #include "Editor.h"
 #include "Framework/Core/Log/Log.h"
+#include "spdlog/spdlog.h"
 
 namespace Rosefinch
 {
@@ -9,6 +10,6 @@ namespace Rosefinch
 
     void Editor::Run()
     {
-        LOG_DEBUG("start editor");
+        LOG_INFO("start editor");
     }
 }

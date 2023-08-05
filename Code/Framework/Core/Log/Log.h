@@ -27,13 +27,13 @@ namespace Rosefinch
 
         std::shared_ptr<spdlog::logger> GetLogger()
         {
-            return m_logger;
+            return m_Logger;
         } 
 
     private:
         Log();
         ~Log();
 
-        std::shared_ptr<spdlog::logger> m_logger;
+        std::shared_ptr<spdlog::logger> m_Logger;
     };
 }
