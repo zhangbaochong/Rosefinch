@@ -6,4 +6,3 @@ target("Framework")
     add_headerfiles("**.h")
 
     set_kind("$(kind)")
-    add_rules("module")
