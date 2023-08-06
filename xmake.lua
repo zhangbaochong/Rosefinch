@@ -7,6 +7,7 @@ add_requires("spdlog")
 add_requires("glm")
 add_requires("gtest")
 add_requires("glfw")
+add_requires("vulkansdk")
 
 includes("Code")
 add_includedirs("Code/")

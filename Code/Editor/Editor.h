@@ -9,6 +9,7 @@ namespace Rosefinch
         Editor();
         virtual ~Editor();
 
+        void Init();
         void Run();
     };
 }
