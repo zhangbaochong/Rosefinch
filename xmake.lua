@@ -32,7 +32,6 @@ rule_end()
 
 task("test")
     on_run(function ()
-        os.exec("xmake f -m debug")
         os.exec("xmake")
         os.exec("xmake run -g test")
     end)
@@ -48,5 +47,13 @@ task("e")
     on_run(function()
         os.exec("xmake")
         os.exec("xmake run Editor")
+    end)
+    set_menu{}
+
+task("d")
+    on_run(function ()
+        os.exec("xmake f -m debug")
+        os.exec("xmake")
+        os.exec("xmake run -d Editor")
     end)
     set_menu{}
