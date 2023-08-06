@@ -20,6 +20,8 @@ namespace Rosefinch
 
         void Init(WindowCreateInfo createInfo);
         GLFWwindow* GetWindow() const;
+        void PollEvents() const;
+        bool ShouldClose() const;
         
     private:
         GLFWwindow* m_Window {nullptr};

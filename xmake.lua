@@ -43,3 +43,10 @@ task("vs")
         os.exec("xmake project -k vsxmake")
     end)
     set_menu{}
+
+task("e")
+    on_run(function()
+        os.exec("xmake")
+        os.exec("xmake run Editor")
+    end)
+    set_menu{}

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Framework/Engine.h"
 
 namespace Rosefinch
 {
@@ -9,7 +10,10 @@ namespace Rosefinch
         Editor();
         virtual ~Editor();
 
-        void Init();
+        void Init(Engine* engineRuntime);
         void Run();
+
+    protected:
+        Engine* m_EngineRuntime {nullptr};
     };
 }

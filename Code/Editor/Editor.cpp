@@ -8,9 +8,10 @@ namespace Rosefinch
 
     Editor::~Editor() {}
 
-    void Editor::Init()
+    void Editor::Init(Engine* engineRuntime)
     {
-        g_RuntimeGlobalContext.StartSystems("");
+        assert(engineRuntime);
+        m_EngineRuntime = engineRuntime;
     }
 
     void Editor::Run()
@@ -18,7 +19,7 @@ namespace Rosefinch
         LOG_INFO("start editor");
         while (true)
         {
-            
+            m_EngineRuntime->Run();
         }
     }
 }

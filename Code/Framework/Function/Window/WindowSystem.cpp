@@ -28,10 +28,31 @@ namespace Rosefinch
             glfwTerminate();
             return;
         }
+
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+        LOG_INFO("{} extensions support", extensionCount);
+
+        // while (!glfwWindowShouldClose(m_Window))
+        // {
+        //     glfwPollEvents();
+        // }
+
+        glfwSetWindowUserPointer(m_Window, this);
     }
 
-    GLFWwindow* WindowSystem::GetWindow() const
+    GLFWwindow *WindowSystem::GetWindow() const
     {
         return m_Window;
+    }
+
+    void WindowSystem::PollEvents() const
+    {
+        glfwPollEvents();
+    }
+
+    bool WindowSystem::ShouldClose() const 
+    {
+        return glfwWindowShouldClose(m_Window);
     }
 }
