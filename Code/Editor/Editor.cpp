@@ -19,7 +19,11 @@ namespace Rosefinch
         LOG_INFO("start editor");
         while (true)
         {
-            m_EngineRuntime->Run();
+            float deltaTime = 0.0f; // TODO cal deltaTime
+            if (!m_EngineRuntime->TickOneFrame(deltaTime))
+            {
+                return;
+            }
         }
     }
 }

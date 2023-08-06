@@ -22,29 +22,16 @@ namespace Rosefinch
 
     }
 
-    void Engine::Run() 
-    {
-        auto windowSystem = g_RuntimeGlobalContext.m_WindowSystem;
-        if (!windowSystem)
-        {
-            LOG_CRITICAL("failed to get windowSystem");
-        }
-
-        while (!windowSystem->ShouldClose())
-        {
-            float deltaTime = 0.0f;
-            TickOneFrame(deltaTime);
-        }
-
-    }
-
-    void Engine::TickOneFrame(float deltaTime)
+    bool Engine::TickOneFrame(float deltaTime)
     {
         LogicalTick(deltaTime);
 
         RendererTick();
 
         g_RuntimeGlobalContext.m_WindowSystem->PollEvents();
+
+        auto shouldWindowClose = g_RuntimeGlobalContext.m_WindowSystem->ShouldClose();
+        return !shouldWindowClose;
     }
 
     void Engine::LogicalTick(float deltaTime) 

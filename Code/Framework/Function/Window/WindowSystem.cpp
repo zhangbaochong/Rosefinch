@@ -37,7 +37,7 @@ namespace Rosefinch
         // {
         //     glfwPollEvents();
         // }
-
+        glfwSetWindowCloseCallback(m_Window, OnWindowCloseCallback);
         glfwSetWindowUserPointer(m_Window, this);
     }
 

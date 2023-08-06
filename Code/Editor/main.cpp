@@ -11,4 +11,6 @@ int main(int argv, char** argc)
     Rosefinch::Editor* editor = new Rosefinch::Editor();
     editor->Init(engine);
     editor->Run();
+
+    engine->ShutdownEngine();
 }

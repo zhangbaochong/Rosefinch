@@ -1,4 +1,5 @@
-#pragma once 
+#pragma once
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -6,10 +7,10 @@ namespace Rosefinch
 {
     struct WindowCreateInfo
     {
-        int width {1920};
-        int height {1080};
-        const char* title {"Rosefinch Engine"};
-        bool is_FullScreen {false};
+        int width{1920};
+        int height{1080};
+        const char *title{"Rosefinch Engine"};
+        bool is_FullScreen{false};
     };
 
     class WindowSystem
@@ -19,15 +20,17 @@ namespace Rosefinch
         ~WindowSystem();
 
         void Init(WindowCreateInfo createInfo);
-        GLFWwindow* GetWindow() const;
+        GLFWwindow *GetWindow() const;
         void PollEvents() const;
         bool ShouldClose() const;
-        
-    private:
-        GLFWwindow* m_Window {nullptr};
 
-        int m_Width {0};
-        int m_Height {0};
-        
+    protected:
+        static void OnWindowCloseCallback(GLFWwindow *window) { glfwSetWindowShouldClose(window, true); }
+
+    private:
+        GLFWwindow *m_Window{nullptr};
+
+        int m_Width{0};
+        int m_Height{0};
     };
 }
