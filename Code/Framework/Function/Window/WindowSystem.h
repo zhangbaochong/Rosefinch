@@ -2,6 +2,7 @@
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include "Framework/Function/Events/Event.h"
 
 namespace Rosefinch
 {
@@ -16,21 +17,27 @@ namespace Rosefinch
     class WindowSystem
     {
     public:
-        WindowSystem() = default;
+        using EventCallbackFn = std::function<void(Event &)>;
+
+        WindowSystem(WindowCreateInfo createInfo);
         ~WindowSystem();
 
-        void Init(WindowCreateInfo createInfo);
         GLFWwindow *GetWindow() const;
         void PollEvents() const;
-        bool ShouldClose() const;
 
-    protected:
-        static void OnWindowCloseCallback(GLFWwindow *window) { glfwSetWindowShouldClose(window, true); }
-
+        void SetEventCallback(const EventCallbackFn &callback) { m_Data.EventCallback = callback; }
     private:
+        void Init(WindowCreateInfo createInfo);
         GLFWwindow *m_Window{nullptr};
 
-        int m_Width{0};
-        int m_Height{0};
+        struct WindowData
+        {
+            std::string Title;
+            unsigned int Width, Height;
+
+            EventCallbackFn EventCallback;
+        };
+
+        WindowData m_Data;
     };
 }

@@ -5,6 +5,8 @@ from https://github.com/TheCherno/Hazel
 
 #include <string>
 #include <sstream>
+#include <functional>
+#include "Framework/Core/Base.h"
 
 namespace Rosefinch 
 {
@@ -37,15 +39,15 @@ namespace Rosefinch
     class Event
     {
     public:
-        virtual ~Event() = 0;
-        bool is_Handled = false;
+        virtual ~Event() = default;
+        bool Handled = false;
 
         virtual EventType GetEventType() const = 0;
         virtual const char* GetName() const = 0;
         virtual int GetCategoryFlags() const  = 0;
         virtual std::string ToString() const { return GetName(); }
 
-        bool IsCategory(EventCategory category)
+        bool IsInCategory(EventCategory category)
         {
             return GetCategoryFlags() & category;
         }
@@ -53,11 +55,15 @@ namespace Rosefinch
 
 
     class EventDispatcher
-    {
-    public:
-        EventDispatcher(Event& event) : m_Event(event) {}
-
-        template<typename T, typename F>
+	{
+	public:
+		EventDispatcher(Event& event)
+			: m_Event(event)
+		{
+		}
+		
+		// F will be deduced by the compiler
+		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
@@ -67,9 +73,9 @@ namespace Rosefinch
 			}
 			return false;
 		}
-    private:
-        Event& m_Event;
-    };
+	private:
+		Event& m_Event;
+	};
 
 
     inline std::ostream& operator<<(std::ostream& os, Event& event)

@@ -7,9 +7,8 @@ namespace Rosefinch
 
     void GlobalContext::StartSystems(const std::string& configFilePath)
     {
-        m_WindowSystem = std::make_shared<WindowSystem>();
         WindowCreateInfo createInfo;
-        m_WindowSystem->Init(createInfo);
+        m_WindowSystem = std::make_shared<WindowSystem>(createInfo);
     }
 
     void GlobalContext::ShutdownSystems()

@@ -1,8 +1,16 @@
 #include "WindowSystem.h"
 #include "Framework/Core/Log/Log.h"
+#include "Framework/Function/Events/ApplicationEvent.h"
+#include "Framework/Function/Events/KeyEvent.h"
+#include "Framework/Function/Events/MouseEvent.h"
 
 namespace Rosefinch
 {
+    WindowSystem::WindowSystem(WindowCreateInfo createInfo)
+    {
+        this->Init(createInfo);
+    }
+
     WindowSystem::~WindowSystem()
     {
         glfwDestroyWindow(m_Window);
@@ -17,11 +25,11 @@ namespace Rosefinch
             return;
         }
 
-        m_Width = createInfo.width;
-        m_Height = createInfo.height;
+        m_Data.Width = createInfo.width;
+        m_Data.Height = createInfo.height;
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        m_Window = glfwCreateWindow(m_Width, m_Height, createInfo.title, nullptr, nullptr);
+        m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, createInfo.title, nullptr, nullptr);
         if (!m_Window)
         {
             LOG_CRITICAL("failed to create glfw window");
@@ -33,12 +41,14 @@ namespace Rosefinch
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
         LOG_INFO("{} extensions support", extensionCount);
 
-        // while (!glfwWindowShouldClose(m_Window))
-        // {
-        //     glfwPollEvents();
-        // }
-        glfwSetWindowCloseCallback(m_Window, OnWindowCloseCallback);
-        glfwSetWindowUserPointer(m_Window, this);
+        glfwSetWindowUserPointer(m_Window, &m_Data);
+
+        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowCloseEvent event;
+            data.EventCallback(event);
+        });
     }
 
     GLFWwindow *WindowSystem::GetWindow() const
@@ -49,10 +59,5 @@ namespace Rosefinch
     void WindowSystem::PollEvents() const
     {
         glfwPollEvents();
-    }
-
-    bool WindowSystem::ShouldClose() const 
-    {
-        return glfwWindowShouldClose(m_Window);
     }
 }

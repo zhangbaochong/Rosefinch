@@ -22,16 +22,13 @@ namespace Rosefinch
 
     }
 
-    bool Engine::TickOneFrame(float deltaTime)
+    void Engine::TickOneFrame(float deltaTime)
     {
         LogicalTick(deltaTime);
 
         RendererTick();
 
         g_RuntimeGlobalContext.m_WindowSystem->PollEvents();
-
-        auto shouldWindowClose = g_RuntimeGlobalContext.m_WindowSystem->ShouldClose();
-        return !shouldWindowClose;
     }
 
     void Engine::LogicalTick(float deltaTime) 

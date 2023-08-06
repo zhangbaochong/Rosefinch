@@ -9,7 +9,7 @@ namespace Rosefinch
         void StartEngine(const std::string configFilePath);
         void ShutdownEngine();
 
-        bool TickOneFrame(float deltaTime);
+        void TickOneFrame(float deltaTime);
         void Init();
 
     protected:
