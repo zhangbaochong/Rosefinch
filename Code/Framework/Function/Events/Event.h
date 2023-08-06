@@ -1,8 +1,10 @@
-#pragma once
 /*
-from https://github.com/TheCherno/Hazel/blob/master/Hazel/src/Hazel/Events/Event.h
+from https://github.com/TheCherno/Hazel
 */
+#pragma once
+
 #include <string>
+#include <sstream>
 
 namespace Rosefinch 
 {

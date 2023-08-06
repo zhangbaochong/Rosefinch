@@ -1,4 +1,8 @@
+/*
+from https://github.com/TheCherno/Hazel
+*/
 #pragma once
+#include <stdint.h> 
 
 namespace Rosefinch
 {

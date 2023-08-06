@@ -6,6 +6,7 @@ add_rules("plugin.vsxmake.autoupdate")
 add_requires("spdlog")
 add_requires("glm")
 add_requires("gtest")
+add_requires("glfw")
 
 includes("Code")
 add_includedirs("Code/")
