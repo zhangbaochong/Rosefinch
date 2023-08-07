@@ -19,6 +19,17 @@ jobs:
         with:
           xmake-version: latest
 
+      - name: vulkansdk
+        run: |
+          Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/1.1.92.1/windows/VulkanSDK-1.1.92.1-Installer.exe?Human=true -OutFile VulkanSDK-1.1.92.1-Installer.exe
+          7z x ./VulkanSDK-1.1.92.1-Installer.exe -oVulkanSDK
+
+      - name: configure
+        run: |
+          $env:VULKAN_SDK="$(pwd)/VulkanSDK"
+          mkdir build; cd build
+          cmake -DNCNN_VULKAN=ON ..
+
       - name: Build
         run: |
           echo y | xmake e
