@@ -27,8 +27,6 @@ namespace Rosefinch
         LogicalTick(deltaTime);
 
         RendererTick();
-
-        g_RuntimeGlobalContext.m_WindowSystem->PollEvents();
     }
 
     void Engine::LogicalTick(float deltaTime) 

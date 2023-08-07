@@ -24,6 +24,8 @@ namespace Rosefinch
         {
             float deltaTime = 0.0f; // TODO cal deltaTime
             m_EngineRuntime->TickOneFrame(deltaTime);
+            
+            g_RuntimeGlobalContext.m_WindowSystem->PollEvents();
         }
     }
 
