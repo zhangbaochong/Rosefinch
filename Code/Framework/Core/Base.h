@@ -1,4 +1,5 @@
 #pragma once
+#include "Framework/Core/Log/Log.h"
 
 #define BIT(x) (1 << x)
 

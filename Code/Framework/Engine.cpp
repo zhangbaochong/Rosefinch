@@ -34,5 +34,8 @@ namespace Rosefinch
 
     }
 
-    void Engine::RendererTick() {}
+    void Engine::RendererTick()
+    {
+        
+    }
 }

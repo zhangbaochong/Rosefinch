@@ -1,8 +1,8 @@
 #include "WindowSystem.h"
 #include "Framework/Core/Log/Log.h"
-#include "Framework/Function/Events/ApplicationEvent.h"
-#include "Framework/Function/Events/KeyEvent.h"
-#include "Framework/Function/Events/MouseEvent.h"
+#include "Framework/Core/Events/ApplicationEvent.h"
+#include "Framework/Core/Events/KeyEvent.h"
+#include "Framework/Core/Events/MouseEvent.h"
 
 namespace Rosefinch
 {
