@@ -21,8 +21,8 @@ jobs:
 
       - name: vulkansdk
         run: |
-          Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/1.1.92.1/windows/VulkanSDK-1.1.92.1-Installer.exe?Human=true -OutFile VulkanSDK-1.1.92.1-Installer.exe
-          7z x ./VulkanSDK-1.1.92.1-Installer.exe -oVulkanSDK
+          Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/1.3.250.1/windows/VulkanSDK-1.3.250.1-Installer.exe?Human=true -OutFile VulkanSDK-1.3.250.1-Installer.exe
+          7z x ./VulkanSDK-1.3.250.1-Installer.exe -oVulkanSDK
 
       - name: configure
         run: |
