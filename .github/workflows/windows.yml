@@ -27,9 +27,11 @@ jobs:
       - name: configure
         run: |
           $env:VULKAN_SDK="$(pwd)/VulkanSDK"
+          cd VulkanSDK
           mkdir build; cd build
           cmake -DNCNN_VULKAN=ON ..
 
       - name: Build
         run: |
+          cd ..
           echo y | xmake e
