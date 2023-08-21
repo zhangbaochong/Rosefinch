@@ -3,11 +3,11 @@
 
 namespace Rosefinch
 {
-    class EditorUILayer : public Layer
+    class ImGuiLayer : public Layer
     {
     public:
-        EditorUILayer();
-        ~EditorUILayer() = default;
+        ImGuiLayer();
+        ~ImGuiLayer() = default;
 
         virtual void OnAttach() override;
         virtual void OnDetach() override;
