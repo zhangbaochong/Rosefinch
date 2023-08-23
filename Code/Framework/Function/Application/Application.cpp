@@ -35,10 +35,19 @@ namespace Rosefinch
 
             if (!m_Minimized)
             {
-                for (Layer* layer: m_layerStack)
+                for (Layer* layer: m_LayerStack)
                 {
                     layer->OnUpdate(deltaTime);
                 }
+
+                m_ImguiLayer->Begin();
+                {
+                    for (Layer* layer: m_LayerStack)
+                    {
+                        layer->OnImGuiRender();
+                    }
+                }
+                m_ImguiLayer->End();
             }
 
             m_EngineRuntime->TickOneFrame(deltaTime);
@@ -54,7 +63,7 @@ namespace Rosefinch
         dispatcher.Dispatch<WindowCloseEvent>(HZ_BIND_EVENT_FN(Application::OnWindowClose));
         dispatcher.Dispatch<WindowResizeEvent>(HZ_BIND_EVENT_FN(Application::OnWindowResize));
 
-        for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
+        for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
         {
             if (e.Handled)
             {
@@ -87,13 +96,13 @@ namespace Rosefinch
 
     void Application::PushLayer(Layer* layer)
     {
-        m_layerStack.PushLayer(layer);
+        m_LayerStack.PushLayer(layer);
         layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer* overlay)
     {
-        m_layerStack.PushOverlay(overlay);
+        m_LayerStack.PushOverlay(overlay);
         overlay->OnAttach();
     }
 }

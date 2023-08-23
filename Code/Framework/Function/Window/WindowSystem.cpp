@@ -133,7 +133,7 @@ namespace Rosefinch
         });
     }
 
-    GLFWwindow *WindowSystem::GetWindow() const
+    GLFWwindow* WindowSystem::GetWindow() const
     {
         return m_Window;
     }

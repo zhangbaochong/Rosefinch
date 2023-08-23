@@ -8,7 +8,7 @@ add_requires("glm")
 add_requires("gtest")
 add_requires("glfw")
 add_requires("vulkansdk")
-add_requires("imgui")
+add_requires("imgui v1.89.8-docking", {configs = { glfw = true, vulkan = true}})
 
 includes("Code")
 add_includedirs("Code/")

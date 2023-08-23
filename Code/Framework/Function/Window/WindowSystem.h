@@ -22,10 +22,13 @@ namespace Rosefinch
         WindowSystem(WindowCreateInfo createInfo);
         ~WindowSystem();
 
-        GLFWwindow *GetWindow() const;
+        GLFWwindow* GetWindow() const;
+        unsigned int GetWidth() const { return m_Data.Width; };
+        unsigned int GetHeight() const { return m_Data.Height; }
         void PollEvents() const;
 
         void SetEventCallback(const EventCallbackFn &callback) { m_Data.EventCallback = callback; }
+
     private:
         void Init(WindowCreateInfo createInfo);
         GLFWwindow *m_Window{nullptr};

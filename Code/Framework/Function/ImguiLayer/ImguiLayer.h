@@ -11,7 +11,10 @@ namespace Rosefinch
 
         virtual void OnAttach() override;
         virtual void OnDetach() override;
-        virtual void OnUpdate(float deltaTime) override;
         virtual void OnEvent(Event& event) override;
+        virtual void OnImGuiRender() override;
+
+        void Begin();
+        void End();
     };
 }

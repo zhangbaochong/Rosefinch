@@ -24,6 +24,7 @@ namespace Rosefinch
         void PushOverlay(Layer* overlay);
 
         static Application& Get() { return *s_Instance; }
+
     protected:
         Engine* m_EngineRuntime {nullptr};
 
@@ -34,7 +35,7 @@ namespace Rosefinch
     private:
         bool m_Running = true;
         bool m_Minimized = false;
-        LayerStack m_layerStack;
+        LayerStack m_LayerStack;
         ImGuiLayer* m_ImguiLayer;
 
     private:
