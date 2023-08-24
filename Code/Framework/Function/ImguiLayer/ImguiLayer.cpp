@@ -79,4 +79,9 @@ namespace Rosefinch
 		// 	glfwMakeContextCurrent(backupCurrentContext);
 		// }
     }
+
+    void ImGuiLayer::SetupVulkan()
+    {
+        
+    }
 }

@@ -9,6 +9,7 @@ add_requires("gtest")
 add_requires("glfw")
 add_requires("vulkansdk")
 add_requires("imgui v1.89.8-docking", {configs = { glfw = true, vulkan = true}})
+add_requires("vulkan-memory-allocator v3.0.1")
 
 includes("Code")
 add_includedirs("Code/")

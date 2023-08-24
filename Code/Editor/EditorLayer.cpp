@@ -11,7 +11,7 @@ Rosefinch::EditorLayer::~EditorLayer()
 
 void Rosefinch::EditorLayer::OnAttach()
 {
-
+    LOG_DEBUG("editor layer attached.");
 }
 
 void Rosefinch::EditorLayer::OnDetach()
@@ -20,7 +20,7 @@ void Rosefinch::EditorLayer::OnDetach()
 
 void Rosefinch::EditorLayer::OnUpdate(float deltaTime)
 {
-    LOG_DEBUG("editor layer");
+    
 }
 
 void Rosefinch::EditorLayer::OnEvent(Event &event)
