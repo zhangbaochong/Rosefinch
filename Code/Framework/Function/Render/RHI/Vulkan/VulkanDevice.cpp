@@ -1,4 +1,4 @@
-#include "Device.h"
+#include "VulkanDevice.h"
 
 namespace Rosefinch
 {
