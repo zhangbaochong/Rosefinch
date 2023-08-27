@@ -3,6 +3,60 @@
 
 namespace Rosefinch
 {
+    /// An enumeration for device features to query
+    enum class DeviceFeature
+    {
+        None        = 0,         ///< No device features. Used for initialization.
+        FP16        = 1 << 0,    ///< Does the device support FP16 capabilities.
+        VRSTier1    = 1 << 1,    ///< Does the device support VRS Tier 1 capabilities.
+        VRSTier2    = 1 << 2,    ///< Does the device support VRS Tier 2 capabilities.
+        RT_1_0      = 1 << 3,    ///< Does the device support RT 1.0 capabilities.
+        RT_1_1      = 1 << 4,    ///< Does the device support RT 1.1 capabilities.
+        WaveSize    = 1 << 5,    ///< Does the device support wave size control capabilities.
+    };
+    ENUM_FLAG_OPERATORS(DeviceFeature)
+
+    /// An enumeration for shader stage
+    enum class ShaderStage
+    {
+        Vertex = 0,     ///< Shader vertex stage.
+        Pixel,          ///< Shader pixel stage.
+        Hull,           ///< Shader hull stage.
+        Domain,         ///< Shader domain stage.
+        Geometry,       ///< Shader geometry stage.
+        Compute,        ///< Shader compute stage.
+    };
+
+    /// An enumeration for shader stage
+    /// Note, need to also update the JSON config enums in Framework.cpp when this changes
+    /// Note2, need to also update defines strings in shaderbuild_win.cpp
+    enum class ShaderModel
+    {
+        SM5_1 = 0,  ///< default basic hsls support.
+        SM6_0,      ///< wave intrinsics & 64-integers for arithmetic.
+        SM6_1,      ///< SV_ViewID, barycentric semantics, and GetAttributeAtVertex.
+        SM6_2,      ///< float16 support (instead of minfloat16) and denorm mode selection.
+        SM6_3,      ///< DXR support.
+        SM6_4,      ///< low-precision packed dot product, library sub-object support for RT.
+        SM6_5,      ///< DXR 1.1, Sampler Feedback, Mesh and Amplification shaders, and more wave intrinsics.
+        SM6_6,      ///< New Atomic operations, Dynamic Resources, Helper Lane Detection, Compute derivatives,
+                    ///< new Pack/Unpack intrinsics, WaveSize, RT payload access qualifiers.
+        SM6_7,      ///< Expanded texture fetching, quad querying, and wave capabilities.
+    };
+
+    /// An enumeration for command queue types
+    enum class CommandQueue : int32_t
+    {
+        // Single threaded (for now)
+        Graphics = 0,                   ///< Graphics command queue (single threaded).
+        Compute,                        ///< Compute command queue (single threaded).
+
+        // Multi-threaded
+        Copy,                           ///< Copy command queue (multi threaded).
+
+        Count                           ///< CommandQueue type count.
+    };
+
     enum class ResourceFlags : uint32_t
     {
         None                    = 0x0,          ///< No flags.

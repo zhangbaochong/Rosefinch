@@ -1,5 +1,4 @@
 #include "GlobalContext.h"
-#include "Framework/Function/Window/WindowSystem.h"
 
 namespace Rosefinch
 {
@@ -9,6 +8,9 @@ namespace Rosefinch
     {
         WindowCreateInfo createInfo;
         m_WindowSystem = std::make_shared<WindowSystem>(createInfo);
+
+        m_RenderSystem = std::make_shared<RenderSystem>();
+        m_RenderSystem->Init();
     }
 
     void GlobalContext::ShutdownSystems()

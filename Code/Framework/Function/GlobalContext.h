@@ -2,10 +2,12 @@
 #include <memory>
 #include <string>
 #include "Framework/Function/Window/WindowSystem.h"
+#include "Framework/Function/Render/RenderSystem.h"
 
 namespace Rosefinch
 {
     class WindowSystem;
+    class RenderSystem;
 
     class GlobalContext
     {
@@ -15,7 +17,7 @@ namespace Rosefinch
 
     public:
         std::shared_ptr<WindowSystem> m_WindowSystem;
-
+        std::shared_ptr<RenderSystem> m_RenderSystem;
     };
 
     extern GlobalContext g_RuntimeGlobalContext;
