@@ -181,4 +181,14 @@ namespace Rosefinch
         ShaderResource          = NonPixelShaderResource | PixelShaderResource,             ///< Shader resource (general) state
     };
     ENUM_FLAG_OPERATORS(ResourceState)
+
+    /// An enumeration for texture dimension.
+    enum class TextureDimension : uint32_t
+    {
+        Unknown = 0,        ///< Unknown texture dimension.
+        Texture1D,          ///< 1D texture dimension.
+        Texture2D,          ///< 2D texture dimension.
+        Texture3D,          ///< 3D texture dimension.
+        CubeMap,            ///< Cubed texture dimension.
+    };
 }
