@@ -1,7 +1,7 @@
 #pragma once
 #include "Framework/Core/Base.h"
 #include "Framework/Function/Render/RenderDefines.h"
-#include "Framework/Function/Render/ResourceView.h"
+#include "Framework/Function/Render/RHI/ResourceView.h"
 
 namespace Rosefinch
 {
