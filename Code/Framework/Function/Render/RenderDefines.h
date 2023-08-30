@@ -213,4 +213,47 @@ namespace Rosefinch
         float MaxContentLightLevel;         ///< HDR maximum content light level.
         float MaxFrameAverageLightLevel;    ///< HDR maximum average light level.
     };
+
+    /// An enumeration for resource view heap types
+    enum class ResourceViewHeapType : uint32_t
+    {
+        GPUResourceView = 0,    ///< GPU resource view type.
+        CPUResourceView,        ///< CPU resource view type.
+        CPURenderView,          ///< CPU render view type (renter targets).
+        CPUDepthView,           ///< CPU depth view type (depth targets).
+        GPUSamplerView,         ///< GPU sampler view types (samplers).
+        Count                   ///< Resource view heap type count.
+    };
+
+    enum class ViewDimension : uint32_t
+    {
+        Unknown = 0,                ///< View dimension for unknown resource.
+        Buffer,                     ///< View dimension for buffer resource.
+        Texture1D,                  ///< View dimension for 1D texture resource.
+        Texture1DArray,             ///< View dimension for 1D texture array resource.
+        Texture2D,                  ///< View dimension for 2D texture resource.
+        Texture2DArray,             ///< View dimension for 2D texture array resource.
+        Texture2DMS,                ///< View dimension for 2D multi-sampled texture resource.
+        Texture2DMSArray,           ///< View dimension for 2D texture multi-sampled array resource.
+        Texture3D,                  ///< View dimension for 3D texture resource.
+        TextureCube,                ///< View dimension for cube map resource.
+        TextureCubeArray,           ///< View dimension for cube map array resource.
+        RTAccelerationStruct,       ///< View dimension for rt acceleration structure resource.
+    };
+
+    /// An enumeration for resource view types
+    enum class ResourceViewType : uint32_t
+    {
+        CBV = 0,                ///< Constant buffer view type.
+        TextureSRV,             ///< Texture shader resource view type.
+        BufferSRV,              ///< Buffer shader resource view type.
+        TextureUAV,             ///< Texture unordered access view type.
+        BufferUAV,              ///< Buffer unordered access view type.
+        RTV,                    ///< Render target view type.
+        DSV,                    ///< Depth stencil view type.
+        Sampler,                ///< Sampler view type.
+        Count,                  ///< Resource view type count.
+
+        Invalid = 0xffffffff    ///< Invalid resource view type (used for initializations)
+    };
 }
