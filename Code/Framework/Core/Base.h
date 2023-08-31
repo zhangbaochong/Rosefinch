@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
+#include <map>
 
 #define BIT(x) (1 << x)
 
