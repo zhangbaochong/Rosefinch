@@ -30,6 +30,33 @@
     typeName(const typeName &&) = delete; \
     typeName &operator=(const typeName &&) = delete;
 
+/// Aligns a size up to the specified amount.
+///
+/// @param [in] val         The value to align.
+/// @param [in] alignment   The alignment to align the value to.
+///
+/// @returns                The new aligned (if not already aligned) value.
+template<typename T> inline T AlignUp(T val, T alignment)
+{
+    return (val + alignment - (T)1) & ~(alignment - (T)1);
+}
+
+/// Computes the rounded-up integer division of two unsigned integers.
+///
+/// @param [in] a The dividend.
+/// @param [in] b The divisor.
+///
+/// @return The smallest integer greater than or equal to the exact division of a and b.
+constexpr uint32_t DivideRoundingUp(uint32_t a, uint32_t b)
+{
+    return (a + b - 1) / b;
+}
+
+inline float CalculateMipBias(float upscalerRatio)
+{
+    return std::log2f(1.f / upscalerRatio) - 1.f + std::numeric_limits<float>::epsilon();
+}
+
 namespace Rosefinch
 {
     enum AssertLevel
