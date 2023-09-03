@@ -59,3 +59,9 @@ task("d")
         os.exec("xmake run -d Editor")
     end)
     set_menu{}
+
+task("p")
+    on_run(function ()
+        os.exec("xmake project -k compile_commands")
+    end)
+    set_menu{}
