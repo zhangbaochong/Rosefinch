@@ -14,6 +14,17 @@ namespace Rosefinch
     class Texture;
     struct TextureCopyDesc;
 
+    // A structure representing variable shading rate information
+    struct VariableShadingRateInfo
+    {
+        VariableShadingMode VariableShadingMode; ///< The VariableShadingMode to use.
+        ShadingRate BaseShadingRate;             ///< The ShadingRate to use.
+        const Texture *pShadingRateImage;        ///< The shading rate texture to use.
+        ShadingRateCombiner Combiners[2];        ///< The ShadingRateCombiners to use.
+        uint32_t ShadingRateTileWidth;           ///< The shading rate tile width.
+        uint32_t ShadingRateTileHeight;          ///< The shading rate tile height.
+    };
+
     class Device
     {
     public:
@@ -68,87 +79,94 @@ namespace Rosefinch
 
         /**
          * Get the current device name
-        */
+         */
         const char *GetDeviceName() const { return m_DeviceName.c_str(); }
 
         /**
          * Get the current driven version (requires AGS be enabled)
-        */
+         */
         const char *GetDrivenVersion() const { return m_DrivenVersion.c_str(); }
 
         /**
          *  Get the graphics API in use
-        */
+         */
         const char *GetGraphicsAPI() const { return m_GraphicAPI.c_str(); }
 
         /**
          * Get a short-form name for the used API
-        */
+         */
         const char *GetGraphicsAPIShort() const { return m_GraphicAPIShort.c_str(); }
 
         /**
          * Get a pretty-fied string to use to present device name and API
-        */
+         */
         const char *GetGraphicsAPIPretty() const { return m_GraphicAPIPretty.c_str(); }
 
         /**
          * Get the current graphics API version (required AGS be enabled)
-        */
+         */
         const char *GetGraphicsAPIVersion() const { return m_GraphicAPIVersion.c_str(); }
 
         /**
          * Flush the specified queue
-        */
+         */
         virtual void FlushQueue(CommandQueue queueType) = 0;
 
         /**
          * Query the performance counter frequency on a given queue
-        */
+         */
         virtual uint64_t QueryPerformanceFrequency(CommandQueue queueType) = 0;
 
         /**
          * Create a CommandList
-        */
-        virtual CommandList* CreateCommandList(const char* name, CommandQueue queueType) = 0;
+         */
+        virtual CommandList *CreateCommandList(const char *name, CommandQueue queueType) = 0;
 
         /**
          * Create a SwapChain
-        */
-        virtual void CreateSwapChain(SwapChain*& pSwapChian, const SwapChainCreationParams& params, CommandQueue queueType) = 0;
+         */
+        virtual void CreateSwapChain(SwapChain *&pSwapChian, const SwapChainCreationParams &params, CommandQueue queueType) = 0;
 
         /**
          * For SwapChain present and signaling (for synchornization)
-        */
-        virtual uint64_t PresentSwapChain(SwapChain* pSwapChain) = 0;
+         */
+        virtual uint64_t PresentSwapChain(SwapChain *pSwapChain) = 0;
 
         /**
          * Used to wait a signal value has been processed
-        */
+         */
         virtual void WaitOnQueue(uint64_t waitValue, CommandQueue queueType) const = 0;
 
         /**
          * Execute the provided command lists, returns a signal ID that can be used to query completion
-        */
-        virtual uint64_t ExecuteCommandLists(std::vector<CommandList*> cmdLists, CommandQueue queueType, bool isLastSubmissionOfFrame = false) = 0;
+         */
+        virtual uint64_t ExecuteCommandLists(std::vector<CommandList *> cmdLists, CommandQueue queueType, bool isLastSubmissionOfFrame = false) = 0;
 
         /**
          * Similar to ExecuteCommandLists, but will wait until completion
-        */
-        virtual void ExecuteCommandListsImmediate(std::vector<CommandList*> cmdLists, CommandQueue queueType) = 0;
+         */
+        virtual void ExecuteCommandListsImmediate(std::vector<CommandList *> cmdLists, CommandQueue queueType) = 0;
 
         /**
          * Transition a resource in place (blocking call)
-        */
-        virtual void ExecuteResourceTransitionImmediate(uint32_t barrierCount, const Barrier* pBarriers) = 0;
-    
+         */
+        virtual void ExecuteResourceTransitionImmediate(uint32_t barrierCount, const Barrier *pBarriers) = 0;
+
         /**
          * Copy to a texture resource in place (blocking call)
-        */
-        virtual void ExecuteTextureResourceCopyImmediate(uint32_t resourceCopyCount, const TextureCopyDesc* pCopyDescs) = 0;
-    
-        virtual const DeviceInternal* GetImpl() const = 0;
-        virtual DeviceInternal* GetImpl() = 0;
-        
+         */
+        virtual void ExecuteTextureResourceCopyImmediate(uint32_t resourceCopyCount, const TextureCopyDesc *pCopyDescs) = 0;
+
+        /**
+         * Set VariableShadingRateInfo to use
+         */
+        void SetVRSInfo(const VariableShadingRateInfo &variableShadingRateInfo) { m_VariableShadingRateInfo = variableShadingRateInfo; }
+
+        const VariableShadingRateInfo *GetVRSInfo() const { return &m_VariableShadingRateInfo; }
+
+        virtual const DeviceInternal *GetImpl() const = 0;
+        virtual DeviceInternal *GetImpl() = 0;
+
     protected:
         Device();
         void DeleteCommandListAsync(void *pInFlightGPUInfo);
@@ -173,6 +191,7 @@ namespace Rosefinch
         uint32_t m_MinWaveLaneCount = 32;
         uint32_t m_MaxWaveLaneCount = 32;
 
+        VariableShadingRateInfo m_VariableShadingRateInfo;
         // Graphics command lists
         CommandList *m_pActiveCommandList = nullptr;
 
