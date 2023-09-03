@@ -10,6 +10,7 @@ vsxmake2022/
 *.code-workspace
 
 compile_commands.json
+.VSCodeCounter/
 # Compiled Object files
 *.slo
 *.lo
