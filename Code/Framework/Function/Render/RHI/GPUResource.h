@@ -40,7 +40,7 @@ namespace Rosefinch
          *  GPUResource instance creation function. Implemented per api/platform to return the correct
          *  internal resource type.
          */
-        static GPUResource *CreateGPUResource(const wchar_t *resourceName, void *pOwner, ResourceState initialState, void *pInitParams, bool resizable = false);
+        static GPUResource *CreateGPUResource(const char *resourceName, void *pOwner, ResourceState initialState, void *pInitParams, bool resizable = false);
 
         /**
          * Destruction with default behavior.
