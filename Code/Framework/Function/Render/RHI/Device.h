@@ -19,7 +19,7 @@ namespace Rosefinch
     {
         VariableShadingMode VariableShadingMode; ///< The VariableShadingMode to use.
         ShadingRate BaseShadingRate;             ///< The ShadingRate to use.
-        const Texture *pShadingRateImage;        ///< The shading rate texture to use.
+        const Texture* pShadingRateImage;        ///< The shading rate texture to use.
         ShadingRateCombiner Combiners[2];        ///< The ShadingRateCombiners to use.
         uint32_t ShadingRateTileWidth;           ///< The shading rate tile width.
         uint32_t ShadingRateTileHeight;          ///< The shading rate tile height.
@@ -32,7 +32,7 @@ namespace Rosefinch
          * Device instance creation function. Implemented per api to return
          * the corrent internal resource type
          */
-        static Device *CreateDevice();
+        static Device* CreateDevice();
 
         virtual ~Device();
         /**
@@ -43,7 +43,7 @@ namespace Rosefinch
         /**
          * Return a feature information structure for features supporting feature queries
          */
-        virtual void GetFeatureInfo(DeviceFeature feature, void *pFeatureInfo) = 0;
+        virtual void GetFeatureInfo(DeviceFeature feature, void* pFeatureInfo) = 0;
 
         /**
          * Query the highest supported shader model on the current device
@@ -69,7 +69,7 @@ namespace Rosefinch
          * Runs the device through frame initialization, and returns a CommandList
          * to record into for the duration of the frame
          */
-        CommandList *BeginFrame();
+        CommandList* BeginFrame();
 
         /**
          * Ends the current frame. Also closes the current frame's CommandList and
@@ -80,32 +80,32 @@ namespace Rosefinch
         /**
          * Get the current device name
          */
-        const char *GetDeviceName() const { return m_DeviceName.c_str(); }
+        const char* GetDeviceName() const { return m_DeviceName.c_str(); }
 
         /**
          * Get the current driven version (requires AGS be enabled)
          */
-        const char *GetDrivenVersion() const { return m_DrivenVersion.c_str(); }
+        const char* GetDrivenVersion() const { return m_DrivenVersion.c_str(); }
 
         /**
          *  Get the graphics API in use
          */
-        const char *GetGraphicsAPI() const { return m_GraphicAPI.c_str(); }
+        const char* GetGraphicsAPI() const { return m_GraphicAPI.c_str(); }
 
         /**
          * Get a short-form name for the used API
          */
-        const char *GetGraphicsAPIShort() const { return m_GraphicAPIShort.c_str(); }
+        const char* GetGraphicsAPIShort() const { return m_GraphicAPIShort.c_str(); }
 
         /**
          * Get a pretty-fied string to use to present device name and API
          */
-        const char *GetGraphicsAPIPretty() const { return m_GraphicAPIPretty.c_str(); }
+        const char* GetGraphicsAPIPretty() const { return m_GraphicAPIPretty.c_str(); }
 
         /**
          * Get the current graphics API version (required AGS be enabled)
          */
-        const char *GetGraphicsAPIVersion() const { return m_GraphicAPIVersion.c_str(); }
+        const char* GetGraphicsAPIVersion() const { return m_GraphicAPIVersion.c_str(); }
 
         /**
          * Flush the specified queue
@@ -120,17 +120,17 @@ namespace Rosefinch
         /**
          * Create a CommandList
          */
-        virtual CommandList *CreateCommandList(const char *name, CommandQueue queueType) = 0;
+        virtual CommandList* CreateCommandList(const char* name, CommandQueue queueType) = 0;
 
         /**
          * Create a SwapChain
          */
-        virtual void CreateSwapChain(SwapChain *&pSwapChian, const SwapChainCreationParams &params, CommandQueue queueType) = 0;
+        virtual void CreateSwapChain(SwapChain*& pSwapChian, const SwapChainCreationParams& params, CommandQueue queueType) = 0;
 
         /**
          * For SwapChain present and signaling (for synchornization)
          */
-        virtual uint64_t PresentSwapChain(SwapChain *pSwapChain) = 0;
+        virtual uint64_t PresentSwapChain(SwapChain* pSwapChain) = 0;
 
         /**
          * Used to wait a signal value has been processed
@@ -140,36 +140,36 @@ namespace Rosefinch
         /**
          * Execute the provided command lists, returns a signal ID that can be used to query completion
          */
-        virtual uint64_t ExecuteCommandLists(std::vector<CommandList *> cmdLists, CommandQueue queueType, bool isLastSubmissionOfFrame = false) = 0;
+        virtual uint64_t ExecuteCommandLists(std::vector<CommandList*> cmdLists, CommandQueue queueType, bool isLastSubmissionOfFrame = false) = 0;
 
         /**
          * Similar to ExecuteCommandLists, but will wait until completion
          */
-        virtual void ExecuteCommandListsImmediate(std::vector<CommandList *> cmdLists, CommandQueue queueType) = 0;
+        virtual void ExecuteCommandListsImmediate(std::vector<CommandList*> cmdLists, CommandQueue queueType) = 0;
 
         /**
          * Transition a resource in place (blocking call)
          */
-        virtual void ExecuteResourceTransitionImmediate(uint32_t barrierCount, const Barrier *pBarriers) = 0;
+        virtual void ExecuteResourceTransitionImmediate(uint32_t barrierCount, const Barrier* pBarriers) = 0;
 
         /**
          * Copy to a texture resource in place (blocking call)
          */
-        virtual void ExecuteTextureResourceCopyImmediate(uint32_t resourceCopyCount, const TextureCopyDesc *pCopyDescs) = 0;
+        virtual void ExecuteTextureResourceCopyImmediate(uint32_t resourceCopyCount, const TextureCopyDesc* pCopyDescs) = 0;
 
         /**
          * Set VariableShadingRateInfo to use
          */
-        void SetVRSInfo(const VariableShadingRateInfo &variableShadingRateInfo) { m_VariableShadingRateInfo = variableShadingRateInfo; }
+        void SetVRSInfo(const VariableShadingRateInfo& variableShadingRateInfo) { m_VariableShadingRateInfo = variableShadingRateInfo; }
 
-        const VariableShadingRateInfo *GetVRSInfo() const { return &m_VariableShadingRateInfo; }
+        const VariableShadingRateInfo* GetVRSInfo() const { return &m_VariableShadingRateInfo; }
 
-        virtual const DeviceInternal *GetImpl() const = 0;
-        virtual DeviceInternal *GetImpl() = 0;
+        virtual const DeviceInternal* GetImpl() const = 0;
+        virtual DeviceInternal* GetImpl() = 0;
 
     protected:
         Device();
-        void DeleteCommandListAsync(void *pInFlightGPUInfo);
+        void DeleteCommandListAsync(void* pInFlightGPUInfo);
 
     private:
         NO_COPY(Device);
@@ -178,10 +178,10 @@ namespace Rosefinch
     protected:
         struct GPUExecutionPacket
         {
-            std::vector<CommandList *> CmdLists = {};
+            std::vector<CommandList*> CmdLists = {};
             uint64_t CompletionID = 0;
 
-            GPUExecutionPacket(std::vector<CommandList *> &cmdLists, uint64_t completionID) : CmdLists(std::move(cmdLists)), CompletionID(completionID) {}
+            GPUExecutionPacket(std::vector<CommandList*>& cmdLists, uint64_t completionID) : CmdLists(std::move(cmdLists)), CompletionID(completionID) {}
             GPUExecutionPacket() = delete;
         };
 
@@ -193,7 +193,7 @@ namespace Rosefinch
 
         VariableShadingRateInfo m_VariableShadingRateInfo;
         // Graphics command lists
-        CommandList *m_pActiveCommandList = nullptr;
+        CommandList* m_pActiveCommandList = nullptr;
 
         // TODO: add async compute command lists
         const std::string NOT_SET = "Not Set";

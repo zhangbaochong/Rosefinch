@@ -89,7 +89,7 @@ namespace Rosefinch
         void UpdatePipelineType(ShaderBindStage bindStages);
 
         PipelineType m_PipelineType = PipelineType::Undefined;
-        RootSignatureDescInternal *m_pSignatureDescImpl = nullptr;
+        RootSignatureDescInternal* m_pSignatureDescImpl = nullptr;
 
     private:
         NO_COPY(RootSignatureDesc)

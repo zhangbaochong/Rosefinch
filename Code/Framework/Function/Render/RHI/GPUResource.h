@@ -40,7 +40,7 @@ namespace Rosefinch
          *  GPUResource instance creation function. Implemented per api/platform to return the correct
          *  internal resource type.
          */
-        static GPUResource *CreateGPUResource(const char *resourceName, void *pOwner, ResourceState initialState, void *pInitParams, bool resizable = false);
+        static GPUResource* CreateGPUResource(const char* resourceName, void* pOwner, ResourceState initialState, void* pInitParams, bool resizable = false);
 
         /**
          * Destruction with default behavior.
@@ -55,7 +55,7 @@ namespace Rosefinch
         /**
          * Returns the resource's name.
          */
-        const char *GetName() const { return m_Name.c_str(); }
+        const char* GetName() const { return m_Name.c_str(); }
 
         /**
          * Returns true if the resource is a Texture
@@ -75,23 +75,23 @@ namespace Rosefinch
         /**
          * Sets the GPUResource's owner. This is either a Buffer, Texture, or CopyBuffer resource.
          */
-        virtual void SetOwner(void *pOwner) = 0;
+        virtual void SetOwner(void* pOwner) = 0;
 
         /**
          * Returns the resource Texture pointer if the resource is a texture. Returns nullptr otherwise.
          */
-        const Texture *GetTextureResource() const { return (m_OwnerType == OwnerType::Texture) ? m_pTexture : nullptr; }
+        const Texture* GetTextureResource() const { return (m_OwnerType == OwnerType::Texture) ? m_pTexture : nullptr; }
 
         /**
          * Returns the resource Buffer pointer if the resource is a buffer. Returns nullptr otherwise.
          */
-        const Buffer *GetBufferResource() const { return (m_OwnerType == OwnerType::Buffer) ? m_pBuffer : nullptr; }
+        const Buffer* GetBufferResource() const { return (m_OwnerType == OwnerType::Buffer) ? m_pBuffer : nullptr; }
 
         /**
          * @brief   Gets the internal implementation for api/platform parameter accessors.
          */
-        virtual const GPUResourceInternal *GetImpl() const = 0;
-        virtual GPUResourceInternal *GetImpl() = 0;
+        virtual const GPUResourceInternal* GetImpl() const = 0;
+        virtual GPUResourceInternal* GetImpl() = 0;
 
         /**
          * @brief   Returns the current ResourceState the GPU resource is in.
@@ -109,7 +109,7 @@ namespace Rosefinch
         NO_MOVE(GPUResource)
 
     protected:
-        GPUResource(const char* resourceName, void *pOwner, ResourceState initialState, bool resizable);
+        GPUResource(const char* resourceName, void* pOwner, ResourceState initialState, bool resizable);
         GPUResource() = delete;
 
         void InitSubResourceCount(uint32_t subResourceCount);
@@ -128,9 +128,9 @@ namespace Rosefinch
         // Pointer to the owning resource
         union
         {
-            void *m_pOwner = nullptr;
-            Texture *m_pTexture;
-            Buffer *m_pBuffer;
+            void* m_pOwner = nullptr;
+            Texture* m_pTexture;
+            Buffer* m_pBuffer;
         };
 
         // States of all present sub-resources (first entry created by default to span all resources)
@@ -149,20 +149,20 @@ namespace Rosefinch
     struct Barrier
     {
         BarrierType Type;                  ///< The BarrierType
-        const GPUResource *pResource;      ///< The GPUResource to apply the barrier to.
+        const GPUResource* pResource;      ///< The GPUResource to apply the barrier to.
         ResourceState SourceState;         ///< The source ResourceState
         ResourceState DestState;           ///< The destination ResourceState
         uint32_t SubResource = 0xffffffff; ///< The sub-resource to transition (or -1 for whole resource).
 
-        static Barrier Transition(const GPUResource *pRes, ResourceState srcState, ResourceState dstState, uint32_t subResource = 0xffffffff)
+        static Barrier Transition(const GPUResource* pRes, ResourceState srcState, ResourceState dstState, uint32_t subResource = 0xffffffff)
         {
-            Barrier barrier = {BarrierType::Transition, pRes, srcState, dstState, subResource};
+            Barrier barrier = { BarrierType::Transition, pRes, srcState, dstState, subResource };
             return barrier;
         }
 
-        static Barrier UAV(const GPUResource *pRes)
+        static Barrier UAV(const GPUResource* pRes)
         {
-            Barrier barrier = {BarrierType::UAV, pRes, ResourceState::UnorderedAccess, ResourceState::UnorderedAccess};
+            Barrier barrier = { BarrierType::UAV, pRes, ResourceState::UnorderedAccess, ResourceState::UnorderedAccess };
             return barrier;
         }
     };

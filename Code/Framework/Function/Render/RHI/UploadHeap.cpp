@@ -22,17 +22,17 @@ namespace Rosefinch
         m_AvailableAllocations.push_back(allocationInfo);
     }
 
-    TransferInfo *UploadHeap::BeginResourceTransfer(size_t sliceSize, uint64_t sliceAlignment, uint32_t numSlices)
+    TransferInfo* UploadHeap::BeginResourceTransfer(size_t sliceSize, uint64_t sliceAlignment, uint32_t numSlices)
     {
         // Before we try to make any modifications, see how much mem we need and check if there is enough avaliable
         size_t requiredSize = AlignUp(sliceSize, sliceAlignment) * numSlices;
         RosefinchAssert(ASSERT_CRITICAL, requiredSize < m_Size, "Resource will not fit into upload heap, Please make it bigger");
 
         // Spin here until we can get the size we need (might have to wait for other jobs to finish up)
-        uint8_t *pDataBegin = nullptr;
-        uint8_t *pDataEnd = nullptr;
+        uint8_t* pDataBegin = nullptr;
+        uint8_t* pDataEnd = nullptr;
 
-        TransferInfo *pTransferInfo = nullptr;
+        TransferInfo* pTransferInfo = nullptr;
         bool logged = false;
 
         while (!pTransferInfo)
@@ -47,8 +47,8 @@ namespace Rosefinch
                     {
                         // Figure out the begin, aligned begin, and end for the memory we want to use
                         pDataBegin = (*iter).pDataBegin;
-                        uint8_t *pAlignedBegin = reinterpret_cast<uint8_t *>(AlignUp(reinterpret_cast<size_t>(pDataBegin), static_cast<size_t>(sliceAlignment)));
-                        pDataEnd = reinterpret_cast<uint8_t *>(reinterpret_cast<size_t>(pAlignedBegin) + requiredSize);
+                        uint8_t* pAlignedBegin = reinterpret_cast<uint8_t*>(AlignUp(reinterpret_cast<size_t>(pDataBegin), static_cast<size_t>(sliceAlignment)));
+                        pDataEnd = reinterpret_cast<uint8_t*>(reinterpret_cast<size_t>(pAlignedBegin) + requiredSize);
 
                         // Modify the existing block
                         (*iter).pDataBegin = pDataEnd;
@@ -80,17 +80,17 @@ namespace Rosefinch
         pTransferInfo->AllocationInfo.pDataEnd = pDataEnd;
         pTransferInfo->AllocationInfo.Size = ((uint64_t)pTransferInfo->AllocationInfo.pDataEnd) - ((uint64_t)pTransferInfo->AllocationInfo.pDataBegin);
 
-        uint8_t *pSliceStart = pDataBegin;
+        uint8_t* pSliceStart = pDataBegin;
         for (uint32_t i = 0; i < numSlices; ++i)
         {
-            pSliceStart = reinterpret_cast<uint8_t *>(AlignUp(reinterpret_cast<size_t>(pSliceStart), static_cast<size_t>(sliceAlignment)));
+            pSliceStart = reinterpret_cast<uint8_t*>(AlignUp(reinterpret_cast<size_t>(pSliceStart), static_cast<size_t>(sliceAlignment)));
             pTransferInfo->pSliceDataBegin.push_back(pSliceStart);
             pSliceStart += (sliceSize);
         }
         return pTransferInfo;
     }
 
-    void UploadHeap::EndResourceTransfer(TransferInfo *pTransferBlock)
+    void UploadHeap::EndResourceTransfer(TransferInfo* pTransferBlock)
     {
         // Lock to avoid data collisions
         {

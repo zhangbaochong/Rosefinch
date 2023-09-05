@@ -10,14 +10,14 @@ namespace Rosefinch
 
     /**
      * @class ResourceViewAllocator
-     * 
+     *
      * The api/platform-agnostic representation of the resource view allocator
     */
     class ResourceViewAllocator
     {
     public:
         /**
-         * ResourceViewAllocator instance creation function. Implemented per api/platform to 
+         * ResourceViewAllocator instance creation function. Implemented per api/platform to
          * internal resource type
         */
         static ResourceViewAllocator* CreateResourceViewAllocator();
@@ -51,10 +51,10 @@ namespace Rosefinch
 
         virtual ResourceViewAlloctorInternal* GetImpl() = 0;
         virtual const ResourceViewAlloctorInternal* GetImpl() const = 0;
-        
+
     private:
         NO_COPY(ResourceViewAllocator)
-        NO_MOVE(ResourceViewAllocator)
+            NO_MOVE(ResourceViewAllocator)
 
     protected:
         ResourceViewAllocator();

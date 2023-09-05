@@ -20,7 +20,7 @@ namespace Rosefinch
     struct ResourceViewInfo
     {
         uint64_t resourceViewSize[6]; // Memory placeholder
-        const ResourceViewInfoInternal *GetImpl() const { return (ResourceViewInfoInternal *)resourceViewSize; }
+        const ResourceViewInfoInternal* GetImpl() const { return (ResourceViewInfoInternal*)resourceViewSize; }
     };
 
     struct TextureDesc;
@@ -38,7 +38,7 @@ namespace Rosefinch
          * ResourceView instance creation function. Implemented per api/platform to return
          * the internal resoruce type
          */
-        static ResourceView *CreateResourceView(ResourceViewHeapType type, uint32_t count, void *pInitParams);
+        static ResourceView* CreateResourceView(ResourceViewHeapType type, uint32_t count, void* pInitParams);
 
         virtual ~ResourceView() = default;
 
@@ -52,17 +52,17 @@ namespace Rosefinch
         /**
          * Bind a texture resource view
          */
-        virtual void BindTextureResource(const GPUResource *pResource, const TextureDesc &texDesc, ResourceViewType type, ViewDimension dimension, int32_t mip, int32_t arraySize, int32_t firstArraySlice, uint32_t index = 0) = 0;
+        virtual void BindTextureResource(const GPUResource* pResource, const TextureDesc& texDesc, ResourceViewType type, ViewDimension dimension, int32_t mip, int32_t arraySize, int32_t firstArraySlice, uint32_t index = 0) = 0;
 
         /**
          * Bind a buffer resource view
          */
-        virtual void BindBufferResource(const GPUResource *pResource, const BufferDesc &bufferDesc, ResourceViewType type, uint32_t firstElement, uint32_t numElements, uint32_t index = 0) = 0;
+        virtual void BindBufferResource(const GPUResource* pResource, const BufferDesc& bufferDesc, ResourceViewType type, uint32_t firstElement, uint32_t numElements, uint32_t index = 0) = 0;
 
         /**
          * Bind a sampler resource view
          */
-        virtual void BindSamplerResource(const Sampler *pSampler, uint32_t index = 0) = 0;
+        virtual void BindSamplerResource(const Sampler* pSampler, uint32_t index = 0) = 0;
 
     private:
         NO_COPY(ResourceView)

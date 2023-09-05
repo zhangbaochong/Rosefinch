@@ -4,7 +4,7 @@ namespace Rosefinch
 {
 
     Buffer::Buffer(const BufferDesc* pDesc, ResizeFunction fn) : m_BufferDesc(*pDesc),
-                                                                 m_ResizeFn(fn)
+        m_ResizeFn(fn)
     {
     }
 

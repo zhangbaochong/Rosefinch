@@ -23,7 +23,7 @@ namespace Rosefinch
     CommandList* Device::BeginFrame()
     {
         m_pActiveCommandList = CreateCommandList("BeginFrameGraphicsCmdList", CommandQueue::Graphics);
-        
+
         // for vulkan, no need to set resource view heaps
 
         return m_pActiveCommandList;

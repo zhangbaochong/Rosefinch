@@ -12,7 +12,7 @@ namespace Rosefinch
 
     /**
      * @class SwapChain
-     * 
+     *
      * The api/platform-agnostic representation of the swapchain object. Interface for all
      * presentation-related interfaces
     */
@@ -29,7 +29,7 @@ namespace Rosefinch
 
     private:
         NO_COPY(SwapChain)
-        NO_MOVE(SwapChain)
+            NO_MOVE(SwapChain)
 
     protected:
         SwapChain();

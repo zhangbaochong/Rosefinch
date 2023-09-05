@@ -21,7 +21,7 @@ namespace Rosefinch
          * DynamicBufferPool instance creation function. Implemented per api/platform to return
          * the correct internal resource type
          */
-        static DynamicBufferPool *CreateDynamicBufferPool();
+        static DynamicBufferPool* CreateDynamicBufferPool();
 
         virtual ~DynamicBufferPool();
 
@@ -34,24 +34,24 @@ namespace Rosefinch
          * Allocate a temporary constant buffer and initialize it with the provided memory.
          * Return the BufferAddressInfo for the buffer.
          */
-        virtual BufferAddressInfo AllocConstantBuffer(uint32_t size, const void *pInitData) = 0;
+        virtual BufferAddressInfo AllocConstantBuffer(uint32_t size, const void* pInitData) = 0;
 
         /**
          * Allocate a temporary vertex buffer and map the provided pointer to the backing memory.
          * Return the BufferAddressInfo for the buffer.
          */
-        virtual BufferAddressInfo AllocVertexBuffer(uint32_t vertexCount, uint32_t vertexStride, void **pBuffer) = 0;
+        virtual BufferAddressInfo AllocVertexBuffer(uint32_t vertexCount, uint32_t vertexStride, void** pBuffer) = 0;
 
         /**
          * Allocate a temporary index buffer and map the provided pointer to the backing memory.
          * Return the BufferAddressInfo for the buffer.
          */
-        virtual BufferAddressInfo AllocIndexBuffer(uint32_t indexCount, uint32_t indexStride, void **pBuffer) = 0;
+        virtual BufferAddressInfo AllocIndexBuffer(uint32_t indexCount, uint32_t indexStride, void** pBuffer) = 0;
 
         /**
          * Get a constant pointer to the buffer pool's underlaying GPUResource.
         */
-        const GPUResource *GetResource() const { return m_pResource; }
+        const GPUResource* GetResource() const { return m_pResource; }
 
     private:
         NO_COPY(DynamicBufferPool)
@@ -63,10 +63,10 @@ namespace Rosefinch
 
         uint32_t m_TotalSize = 0;
         RingWithTabs m_RingBuffer = {};
-        uint8_t *m_pData = nullptr;
+        uint8_t* m_pData = nullptr;
 
         // Backing resource
-        GPUResource *m_pResource = nullptr;
+        GPUResource* m_pResource = nullptr;
     };
 
 } // namespace Rosefinch

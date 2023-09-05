@@ -15,7 +15,7 @@ namespace Rosefinch
     struct BufferAddressInfo
     {
         uint64_t addressInfosize[4]; // memory placeholder
-        const BufferAddressInfoInternal *GetImpl() const { return (const BufferAddressInfoInternal *)addressInfosize; }
+        const BufferAddressInfoInternal* GetImpl() const { return (const BufferAddressInfoInternal*)addressInfosize; }
     };
 
     // Per platform/API implementation of BufferCopyDesc
@@ -26,11 +26,11 @@ namespace Rosefinch
     struct BufferCopyDesc
     {
         BufferCopyDesc() = default;
-        BufferCopyDesc(const GPUResource *pSrc, const GPUResource *pDst);
+        BufferCopyDesc(const GPUResource* pSrc, const GPUResource* pDst);
 
         uint64_t bufferCopyDescMem[6];
-        BufferCopyDescInternal *GetImpl() { return (BufferCopyDescInternal *)bufferCopyDescMem; }
-        const BufferCopyDescInternal *GetImpl() const { return (const BufferCopyDescInternal *)bufferCopyDescMem; }
+        BufferCopyDescInternal* GetImpl() { return (BufferCopyDescInternal*)bufferCopyDescMem; }
+        const BufferCopyDescInternal* GetImpl() const { return (const BufferCopyDescInternal*)bufferCopyDescMem; }
     };
 
     enum class BufferType
@@ -56,7 +56,7 @@ namespace Rosefinch
 
         std::string Name = ""; // the name to assign to the created buffer resource
 
-        static inline BufferDesc Vertex(const char *name, uint32_t size, uint32_t stride, uint32_t aligment = 0, ResourceFlags flags = ResourceFlags::None)
+        static inline BufferDesc Vertex(const char* name, uint32_t size, uint32_t stride, uint32_t aligment = 0, ResourceFlags flags = ResourceFlags::None)
         {
             BufferDesc desc;
             desc.Type = BufferType::Vertex;
@@ -69,7 +69,7 @@ namespace Rosefinch
             return desc;
         }
 
-        static inline BufferDesc Index(const char *name, uint32_t size, ResourceFormat format, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
+        static inline BufferDesc Index(const char* name, uint32_t size, ResourceFormat format, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
         {
             BufferDesc desc;
             desc.Type = BufferType::Index;
@@ -82,7 +82,7 @@ namespace Rosefinch
             return desc;
         }
 
-        static inline BufferDesc Constant(const char *name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
+        static inline BufferDesc Constant(const char* name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
         {
             BufferDesc desc;
             desc.Type = BufferType::Constant;
@@ -95,7 +95,7 @@ namespace Rosefinch
             return desc;
         }
 
-        static inline BufferDesc Data(const char *name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
+        static inline BufferDesc Data(const char* name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
         {
             BufferDesc desc;
             desc.Type = BufferType::Data;
@@ -108,7 +108,7 @@ namespace Rosefinch
             return desc;
         }
 
-        static inline BufferDesc AccelerationStructure(const char *name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
+        static inline BufferDesc AccelerationStructure(const char* name, uint32_t size, uint32_t stride, uint32_t alignment = 0, ResourceFlags flags = ResourceFlags::None)
         {
             BufferDesc desc;
             desc.Type = BufferType::AccelerationStructure;
@@ -128,19 +128,19 @@ namespace Rosefinch
     {
     public:
         // Function signature for buffer ResizeFunction (when needed).
-        typedef void (*ResizeFunction)(BufferDesc &, uint32_t, uint32_t, uint32_t, uint32_t);
+        typedef void (*ResizeFunction)(BufferDesc&, uint32_t, uint32_t, uint32_t, uint32_t);
 
         virtual ~Buffer();
 
-        static Buffer *CreateBufferResource(const BufferDesc *pDesc, ResourceState initialState, ResizeFunction fn = nullptr);
+        static Buffer* CreateBufferResource(const BufferDesc* pDesc, ResourceState initialState, ResizeFunction fn = nullptr);
 
-        const BufferDesc &GetDesc() const { return m_BufferDesc; }
+        const BufferDesc& GetDesc() const { return m_BufferDesc; }
 
-        const GPUResource *GetResource() const { return m_pResource; }
+        const GPUResource* GetResource() const { return m_pResource; }
 
         // Copy callback used when loading buffer data. Implemented internally per api/platform.
-        virtual void CopyData(const void *pData, size_t size) = 0;
-        virtual void CopyData(const void *pData, size_t size, UploadContext *pUploadCtx, ResourceState postCopyState) = 0;
+        virtual void CopyData(const void* pData, size_t size) = 0;
+        virtual void CopyData(const void* pData, size_t size, UploadContext* pUploadCtx, ResourceState postCopyState) = 0;
 
         // Gets the buffer's BufferAddressInfo for resource binding. Implemented internally per api/platform.
         virtual BufferAddressInfo GetAddressInfo() const = 0;
@@ -152,13 +152,13 @@ namespace Rosefinch
         NO_MOVE(Buffer)
 
     protected:
-        Buffer(const BufferDesc *pDesc, ResizeFunction fn);
+        Buffer(const BufferDesc* pDesc, ResizeFunction fn);
         virtual void Recreate() = 0;
 
         Buffer() = delete;
 
         BufferDesc m_BufferDesc = {};
-        GPUResource *m_pResource = nullptr;
+        GPUResource* m_pResource = nullptr;
         ResizeFunction m_ResizeFn = nullptr;
     };
 }

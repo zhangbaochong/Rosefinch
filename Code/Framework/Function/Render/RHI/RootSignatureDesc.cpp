@@ -2,7 +2,7 @@
 
 namespace Rosefinch
 {
-    RootSignatureDesc &RootSignatureDesc::operator=(RootSignatureDesc &&right) noexcept
+    RootSignatureDesc& RootSignatureDesc::operator=(RootSignatureDesc&& right) noexcept
     {
         m_PipelineType = right.m_PipelineType;
         m_pSignatureDescImpl = right.m_pSignatureDescImpl;
@@ -10,9 +10,9 @@ namespace Rosefinch
         return *this;
     }
 
-    RootSignatureDesc &RootSignatureDesc::operator=(const RootSignatureDesc &&right) noexcept
+    RootSignatureDesc& RootSignatureDesc::operator=(const RootSignatureDesc&& right) noexcept
     {
-        return this->operator=(const_cast<RootSignatureDesc &&>(right));
+        return this->operator=(const_cast<RootSignatureDesc&&>(right));
     }
 
     void RootSignatureDesc::UpdatePipelineType(ShaderBindStage bindStages)

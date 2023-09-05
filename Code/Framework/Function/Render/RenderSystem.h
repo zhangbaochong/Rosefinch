@@ -29,7 +29,7 @@ namespace Rosefinch
         void Init();
 
     public:
-        const RenderConfig *GetConfig() const { return &m_RenderConfig; }
+        const RenderConfig* GetConfig() const { return &m_RenderConfig; }
 
     private:
         RenderConfig m_RenderConfig = {};

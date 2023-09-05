@@ -20,7 +20,7 @@ namespace Rosefinch
         uint32_t MaxAnisotropy = 16;                       // Sampler maximum anisotropy clamp (default to 16)
 
         // Sampler equals operator for runtime comparision
-        bool operator==(const SamplerDesc &rhs) const
+        bool operator==(const SamplerDesc& rhs) const
         {
             return !std::memcpy(this, &ths, sizeof(SamplerDesc));
         }
@@ -52,14 +52,14 @@ namespace Rosefinch
 
         virtual SamplerInternal* GetImpl() = 0;
         virtual const SamplerInternal* GetImpl() const = 0;
-        
+
     private:
         NO_COPY(Sampler)
-        NO_MOVE(Sampler)
+            NO_MOVE(Sampler)
 
     protected:
-        Sampler(const char *name, const SamplerDesc &desc) : m_Name(name),
-                                                             m_SamplerDesc(desc)
+        Sampler(const char* name, const SamplerDesc& desc) : m_Name(name),
+            m_SamplerDesc(desc)
         {
         }
 

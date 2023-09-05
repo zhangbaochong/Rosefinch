@@ -32,18 +32,18 @@ namespace Rosefinch
          * RootSignature instance creation function. Implemented per api/platform to return
          * the correct resource type
          */
-        static RootSignature *CreateRootSignature(const char *name, const RootSignatureDesc &desc);
+        static RootSignature* CreateRootSignature(const char* name, const RootSignatureDesc& desc);
 
         virtual ~RootSignature() = default;
 
         PipelineType GetPipelineType() const { return m_PipelineType; }
 
-        const char *GetName() const { return m_Name.c_str(); }
+        const char* GetName() const { return m_Name.c_str(); }
 
         /**
          * Return the vector of binding descriptions
          */
-        const std::vector<BindingDesc &> GetBindingDescriptions() const { return m_BindingDescriptions; }
+        const std::vector<BindingDesc&> GetBindingDescriptions() const { return m_BindingDescriptions; }
 
         /**
          * Return the binding description offset by bingding type
@@ -53,23 +53,23 @@ namespace Rosefinch
         /**
          * Get the internal implementation for api/platform parameter accessors
          */
-        virtual RootSignatureInternal *GetImpl() = 0;
-        virtual const RootSignatureInternal *GetImpl() const = 0;
+        virtual RootSignatureInternal* GetImpl() = 0;
+        virtual const RootSignatureInternal* GetImpl() const = 0;
 
     private:
         NO_COPY(RootSignature)
         NO_MOVE(RootSignature)
 
-        virtual void Build(const RootSignatureDesc &desc) = 0;
+        virtual void Build(const RootSignatureDesc& desc) = 0;
 
     protected:
-        RootSignature(const char *name) : m_Name(name) {}
+        RootSignature(const char* name) : m_Name(name) {}
         RootSignature() = delete;
 
     protected:
         PipelineType m_PipelineType = PipelineType::Undefined;
         std::string m_Name = "";
         std::vector<BindingDesc> m_BindingDescriptions;
-        int32_t m_BindingDescOffsets[static_cast<uint32_t>(BindingType::Count)] = {-1};
+        int32_t m_BindingDescOffsets[static_cast<uint32_t>(BindingType::Count)] = { -1 };
     };
 }

@@ -13,8 +13,8 @@ namespace Rosefinch
      */
     struct AllocationBlock
     {
-        uint8_t *pDataBegin = nullptr; // The beginning of the allocation data
-        uint8_t *pDataEnd = nullptr;   // The end of the allocation data
+        uint8_t* pDataBegin = nullptr; // The beginning of the allocation data
+        uint8_t* pDataEnd = nullptr;   // The end of the allocation data
         size_t Size = 0;               // The size of the allocation
     };
 
@@ -23,12 +23,12 @@ namespace Rosefinch
      */
     struct TransferInfo
     {
-        uint8_t *DataPtr(uint32_t sliceID) { return pSliceDataBegin[sliceID]; }
+        uint8_t* DataPtr(uint32_t sliceID) { return pSliceDataBegin[sliceID]; }
 
     private:
         friend class UploadHeap;
         AllocationBlock AllocationInfo;         // The backing allocation
-        std::vector<uint8_t *> pSliceDataBegin; // The data pointer for each slice of data in the block
+        std::vector<uint8_t*> pSliceDataBegin; // The data pointer for each slice of data in the block
     };
 
     // Per platform/api implementation of UploadHeap
@@ -36,14 +36,14 @@ namespace Rosefinch
 
     /**
      * @class UploadHeap
-     * 
+     *
      * The api/platform-agnostic representation of the upload heap
     */
     class UploadHeap
     {
     public:
         /**
-         * UploadHeap instance creation function. Implemented per api/platform to return the 
+         * UploadHeap instance creation function. Implemented per api/platform to return the
          * correct internal resource type
         */
         static UploadHeap* CreateUploadHeap();

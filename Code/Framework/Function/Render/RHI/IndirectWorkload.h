@@ -24,11 +24,11 @@ namespace Rosefinch
          * IndirectWorkload isntance creation function. Implemented per api/platform to return
          * the correct internal implementation
          */
-        static IndirectWorkload *CreateIndirectWorkload(const IndirectCommandType &type);
-    
+        static IndirectWorkload* CreateIndirectWorkload(const IndirectCommandType& type);
+
         IndirectWorkload() = default;
 
         virtual ~IndirectWorkload() = default;
     };
-    
+
 } // namepace Rosefinch

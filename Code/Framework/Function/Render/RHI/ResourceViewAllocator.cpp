@@ -5,7 +5,7 @@ namespace Rosefinch
 {
     ResourceViewAllocator::ResourceViewAllocator()
     {
-        const RenderConfig *pConfig = g_RuntimeGlobalContext.m_RenderSystem->GetConfig();
+        const RenderConfig* pConfig = g_RuntimeGlobalContext.m_RenderSystem->GetConfig();
         m_NumViews[static_cast<size_t>(ResourceViewHeapType::GPUResourceView)] = pConfig->GPUResourceViewCount;
         m_NumViews[static_cast<size_t>(ResourceViewHeapType::CPUResourceView)] = pConfig->CPUResourceViewCount;
         m_NumViews[static_cast<size_t>(ResourceViewHeapType::CPURenderView)] = pConfig->CPURenderViewCount;

@@ -3,17 +3,17 @@
 
 namespace Rosefinch
 {
-    Texture *Texture::CreateTexture(const TextureDesc *pDesc, ResourceState initialState, ResizeFunction fn)
+    Texture* Texture::CreateTexture(const TextureDesc* pDesc, ResourceState initialState, ResizeFunction fn)
     {
         return new Texture(pDesc, initialState, fn);
     }
 
-    Texture *Texture::CreateSwapChainTexture(const TextureDesc *pDesc, GPUResource *pResource)
+    Texture* Texture::CreateSwapChainTexture(const TextureDesc* pDesc, GPUResource* pResource)
     {
         return new Texture(pDesc, pResource);
     }
 
-    Texture *Texture::CreateContentTexture(const TextureDesc *pDesc)
+    Texture* Texture::CreateContentTexture(const TextureDesc* pDesc)
     {
         return new Texture(pDesc, ResourceState::CopyDest, nullptr);
     }
@@ -23,7 +23,7 @@ namespace Rosefinch
         delete m_pResource;
     }
 
-    void Texture::OnRenderingResolusionResize(uint32_t outputWidth, uint32_t outputHeight, uint32_t renderingWidth, uint32_t renderingHeight)
+    void Texture::OnRenderingResolutionResize(uint32_t outputWidth, uint32_t outputHeight, uint32_t renderingWidth, uint32_t renderingHeight)
     {
         RosefinchAssert(ASSERT_CRITICAL, m_ResizeFn != nullptr, "There's no method to resize the texture");
 
@@ -32,7 +32,7 @@ namespace Rosefinch
         Recreate();
     }
 
-    SwapChainRenderTarget::SwapChainRenderTarget(const TextureDesc *pDesc, std::vector<GPUResource *>& resources)
+    SwapChainRenderTarget::SwapChainRenderTarget(const TextureDesc* pDesc, std::vector<GPUResource*>& resources)
         : Texture(pDesc, resources[0])
     {
         // initialize resources pointers
@@ -78,7 +78,7 @@ namespace Rosefinch
         m_TextureResources.clear();
     }
 
-    void SwapChainRenderTarget::Update(const TextureDesc *pDesc, std::vector<GPUResource *> &resources)
+    void SwapChainRenderTarget::Update(const TextureDesc* pDesc, std::vector<GPUResource*>& resources)
     {
         // Update all backing resources
         m_TextureDesc = *pDesc;

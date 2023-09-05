@@ -168,10 +168,10 @@ namespace Rosefinch
         }
     }
 
-    GPUResource::GPUResource(const char *resourceName, void *pOwner, ResourceState initialState, bool resizable)
+    GPUResource::GPUResource(const char* resourceName, void* pOwner, ResourceState initialState, bool resizable)
         : m_Name(resourceName),
-          m_Resizable(resizable),
-          m_pOwner(pOwner)
+        m_Resizable(resizable),
+        m_pOwner(pOwner)
     {
         m_CurrentStates.emplace_back(initialState);
     }

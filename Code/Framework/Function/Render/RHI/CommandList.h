@@ -14,7 +14,7 @@ namespace Rosefinch
     private:
         NO_COPY(CommandList)
         NO_MOVE(CommandList)
-    
+
     protected:
         CommandList(CommandQueue queueType);
     };
