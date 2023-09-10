@@ -5,6 +5,11 @@
     </a>
 </div>
 
-**Rosefinch** is a tiny game engine.
+**Rosefinch** is a tiny game engine. 
+
+Code reference:
+* Hazel(https://github.com/TheCherno/Hazel)
+* Piccolo(https://github.com/BoomingTech/Piccolo) 
+* AMD FidelityFX-SDK (https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK).
 
 
