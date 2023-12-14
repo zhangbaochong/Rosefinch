@@ -54,7 +54,7 @@ namespace Rosefinch
 
     private:
         NO_COPY(ResourceViewAllocator)
-            NO_MOVE(ResourceViewAllocator)
+        NO_MOVE(ResourceViewAllocator)
 
     protected:
         ResourceViewAllocator();

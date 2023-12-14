@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/Core/Base.h"
 #include "Framework/Function/Render/RenderDefines.h"
+#include "Framework/Function/Render/RHI/RootSignatureDesc.h"
 
 namespace Rosefinch
 {
@@ -43,7 +44,7 @@ namespace Rosefinch
         /**
          * Return the vector of binding descriptions
          */
-        const std::vector<BindingDesc&> GetBindingDescriptions() const { return m_BindingDescriptions; }
+        const std::vector<BindingDesc>& GetBindingDescriptions() const { return m_BindingDescriptions; }
 
         /**
          * Return the binding description offset by bingding type
