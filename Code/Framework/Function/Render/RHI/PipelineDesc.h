@@ -105,7 +105,7 @@ namespace Rosefinch
          * Add the format of the render targets
         */
         void AddRasterFormats(const ResourceFormat& rtFormat, const ResourceFormat depthFormat = ResourceFormat::Unknown);
-        void AddRasterFormats(const std::vector<ResourceFormat>* rtFormats, const ResourceFormat depthFormat = ResourceFormat::Unknown);
+        void AddRasterFormats(const std::vector<ResourceFormat>& rtFormats, const ResourceFormat depthFormat = ResourceFormat::Unknown);
 
         PipelineDescInternal* GetImpl() { return m_PipelineImpl; }
         const PipelineDescInternal* GetImpl() const { return m_PipelineImpl; }
@@ -179,7 +179,7 @@ namespace Rosefinch
         PipelineType GetPipelineType() const { return m_PipelineType; }
 
         std::vector<ShaderBuildDesc> m_ShaderDescriptions = {};         // shader build descriptions (build shaders from string or file source)
-        std::vector<ShaderBlobDesc> m_ShaderBlodDescriptions = {};      // shader build descriptions (build shaders from shader binary blob)
+        std::vector<ShaderBlobDesc> m_ShaderBlobDescriptions = {};      // shader build descriptions (build shaders from shader binary blob)
 
         bool m_IsWave64 = false;                                        // Sets this pipeline to operate with Wave64 if the shader blob doesn't have this information yet
         PipelineType m_PipelineType = PipelineType::Undefined;          // The pipeline type (compute or graphics)
