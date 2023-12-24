@@ -1,7 +1,8 @@
 #pragma once
 #include "Framework/Core/Base.h"
-#include "Framework/Function/Render/RenderDefines.h"
-#include "Framework/Function/Render/ResourceView.h"
+#include "Framework/Function/Render/RHI/RenderDefines.h"
+#include "Framework/Function/Render/RHI/ResourceView.h"
+#include "Framework/Function/Render/Shaders/ShaderCommon.h"
 
 namespace Rosefinch
 {
@@ -29,7 +30,7 @@ namespace Rosefinch
 
     private:
         NO_COPY(SwapChain)
-            NO_MOVE(SwapChain)
+        NO_MOVE(SwapChain)
 
     protected:
         SwapChain();

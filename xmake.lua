@@ -1,5 +1,5 @@
 add_rules("mode.debug", "mode.release")
-set_languages("c++20")
+set_languages("c++17")
 set_project("Rosefinch")
 add_rules("plugin.vsxmake.autoupdate")
 
