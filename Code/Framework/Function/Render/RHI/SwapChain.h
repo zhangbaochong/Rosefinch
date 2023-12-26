@@ -28,6 +28,16 @@ namespace Rosefinch
         */
         static SwapChain* CreateSwapChain();
 
+        /**
+         * Returns the current back buffer's render target view ResourceViewInfo.
+         */
+        const ResourceViewInfo GetBackBufferRTV() const { return GetBackBufferRTV(m_CurrentBackBuffer); }
+
+        /**
+         * Returns the specified back buffer's render target view ResourceViewInfo.
+         */
+        const ResourceViewInfo GetBackBufferRTV(uint8_t idx) const { return m_pSwapChainRTV->GetViewInfo(static_cast<uint32_t>(idx)); }
+
     private:
         NO_COPY(SwapChain)
         NO_MOVE(SwapChain)

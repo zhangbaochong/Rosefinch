@@ -3,6 +3,7 @@
 #include "Framework/Function/Render/RHI/SwapChain.h"
 #include "Framework/Function/Render/RHI/ResourceViewAllocator.h"
 #include "Framework/Function/Render/RHI/GPUResource.h"
+#include "Framework/Function/GlobalContext.h"
 
 namespace Rosefinch
 {
@@ -19,11 +20,11 @@ namespace Rosefinch
         ResourceViewType viewType = static_cast<bool>(pTex->GetDesc().Flags & ResourceFlags::AllowDepthStencil) ? ResourceViewType::DSV : ResourceViewType::RTV;
         if (viewType == ResourceViewType::RTV)
         {
-            // TODO: GetResourceViewAllocator()->AllocateCPURenderViews(&m_pResourceView);
+            g_RuntimeGlobalContext.m_RenderSystem->GetResourceViewAllocator()->AllocateCPURenderViews(&m_pResourceView);
         }
         else
         {
-            // TODO: GetResourceViewAllocator()->AllocateCPUDepthViews(&m_pResourceView);
+            g_RuntimeGlobalContext.m_RenderSystem->GetResourceViewAllocator()->AllocateCPUDepthViews(&m_pResourceView);
         }
 
         // Bind it
@@ -37,14 +38,12 @@ namespace Rosefinch
 
     ResourceViewInfo RasterView::GetResourceView()
     {
-        // TODO return m_pTexture->IsSwapChain() ? GetSwapChain()->GetBackBufferRTV() : m_pResourceView->GetViewInfo();
-        return m_pResourceView->GetViewInfo();
+        return m_pTexture->IsSwapChain() ? g_RuntimeGlobalContext.m_RenderSystem->GetSwapChain()->GetBackBufferRTV() : m_pResourceView->GetViewInfo();
     }
 
     const ResourceViewInfo RasterView::GetResourceView() const
     {
-        // TODO return m_pTexture->IsSwapChain() ? GetSwapChain()->GetBackBufferRTV() : m_pResourceView->GetViewInfo();
-        return m_pResourceView->GetViewInfo();
+        return m_pTexture->IsSwapChain() ? g_RuntimeGlobalContext.m_RenderSystem->GetSwapChain()->GetBackBufferRTV() : m_pResourceView->GetViewInfo();
     }
 
     RasterViewAllocator::RasterViewAllocator()
