@@ -4,6 +4,8 @@
 #include "Framework/Function/Render/RHI/ResourceView.h"
 #include "Framework/Function/Render/Shaders/ShaderCommon.h"
 
+#include <fstream>
+
 namespace Rosefinch
 {
     class SwapChainRenderTarget;
@@ -29,14 +31,90 @@ namespace Rosefinch
         static SwapChain* CreateSwapChain();
 
         /**
-         * Returns the current back buffer's render target view ResourceViewInfo.
+         * Destruction.
+        */
+        virtual ~SwapChain();
+
+        /**
+         * Return the swap chain resource's format.
+        */
+        ResourceFormat GetSwapChainFormat() const { return m_SwapChainFormat; }
+
+        /**
+         * Return the configured backbuffer count for this run.
+        */
+        size_t GetBackBufferCount();
+
+        /**
+         * Return the current SwapChainRenderTarget.
+        */
+        SwapChainRenderTarget* GetBackBufferRT() { return m_pRenderTarget; }
+
+        /**
+         * Return the current back buffer's render target view ResourceViewInfo.
          */
         const ResourceViewInfo GetBackBufferRTV() const { return GetBackBufferRTV(m_CurrentBackBuffer); }
 
         /**
-         * Returns the specified back buffer's render target view ResourceViewInfo.
+         * Return the specified back buffer's render target view ResourceViewInfo.
          */
         const ResourceViewInfo GetBackBufferRTV(uint8_t idx) const { return m_pSwapChainRTV->GetViewInfo(static_cast<uint32_t>(idx)); }
+
+        /**
+         * Return the current back buffer's index
+        */
+        uint8_t GetBackBufferIndex() const { return m_CurrentBackBuffer; }
+
+        /**
+         * Return the swap chain's configured DisplayMode
+        */
+        const DisplayMode GetSwapChainDisplayMode() const { return  m_CurrentDisplayMode; }
+
+        /**
+         * Return the swap chain's configured HDRMetadata.
+        */
+        const HDRMetadata& GetHDRMetaData() const { return m_HDRMetadata; }
+
+        /**
+         * Callback invoked while processing OnResize events.
+        */
+        virtual void OnResize(uint32_t width, uint32_t height) = 0;
+
+        /**
+         * Waits until the last submitted swap chain has finished presenting. Only waits when we run too far ahead.
+        */
+        virtual void WaitForSwapChain() = 0;
+
+        /**
+         * Execute device presentation of the swapchain.
+        */
+        virtual void Present() = 0;
+
+        /**
+         * Create a screenshot of the current swapchain.
+        */
+        virtual void DumpSwapChainToFile(std::experimental::filesystem::path filePath) = 0;
+
+        /**
+         * Verify if requested display mode can be supported.
+        */
+        DisplayMode CheckAndGetDisplayModeRequested(DisplayMode displayMode);
+
+        /**
+         * Prepare the HDRMetadat based on the seleted display mode for the run.
+        */
+        void PopulateHDRMetadataBasedOnDisplayMode();
+
+        /**
+         * Calculate and set HDRMetadata and color space information.
+        */
+        virtual void SetHDRMetadataAndColorspace() = 0;
+
+        /**
+         * Get the internel implementation for api/platform parameter accessors.
+        */
+        virtual SwapChainInternel* GetImpl() = 0;
+        virtual const SwapChainInternel* GetImpl() const = 0;
 
     private:
         NO_COPY(SwapChain)
