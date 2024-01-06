@@ -5,10 +5,10 @@
 
 namespace Rosefinch
 {
-    class Barrier;
-    class TextureCopyDesc;
-    class BufferCopyDesc;
-    class BufferAddressInfo;
+    struct Barrier;
+    struct TextureCopyDesc;
+    struct BufferCopyDesc;
+    struct BufferAddressInfo;
     class CommandListInternal;
     struct ResourceViewInfo;
     class PipelineObject;
@@ -18,7 +18,7 @@ namespace Rosefinch
     struct VariableShadingRateInfo;
     class Buffer;
     class IndirectWorkload;
-    class TransferInfo;
+    struct TransferInfo;
     class UploadContextInternal;
 
     class CommandList
@@ -219,6 +219,6 @@ namespace Rosefinch
     /**
      * Set the shading rate to use for rasterization workload
     */
-    void SetShadingRate(CommandList* pCmdList, const ShadingRate shadingRate, const GPUResource* pShadingRateImage = nullptr);
+    void SetShadingRate(CommandList* pCmdList, const ShadingRate shadingRate, const ShadingRateCombiner* combiners, const GPUResource* pShadingRateImage = nullptr);
 
 } // namespace Rosefinch

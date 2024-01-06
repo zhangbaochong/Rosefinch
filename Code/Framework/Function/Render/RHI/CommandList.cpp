@@ -2,6 +2,7 @@
 #include "Framework/Function/Render/RHI/Device.h"
 #include "Framework/Function/Render/RHI/Texture.h"
 #include "Framework/Function/Render/RHI/UploadHeap.h"
+#include "Framework/Function/Render/RHI/GPUResource.h"
 #include "Framework/Function/GlobalContext.h"
 
 namespace Rosefinch

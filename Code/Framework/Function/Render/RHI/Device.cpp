@@ -1,5 +1,6 @@
 #include "Device.h"
 #include "Framework/Function/Render/RHI/CommandList.h"
+#include "Framework/Function/GlobalContext.h"
 
 namespace Rosefinch
 {
@@ -40,8 +41,9 @@ namespace Rosefinch
 
         // Asynchronously delete the active command list in the background once it's cleared the graphic queue
         GPUExecutionPacket* pInflightPacket = new GPUExecutionPacket(cmdLists, signalValue);
-        // TODO add below
-        // GetTaskManager()->AddTask(Task(std::bind(&Device::DeleteCommandListAsync, this, std::placeholders::_1), reinterpret_cast<void*>(pInflightPacket)));
+
+        // TODO 
+        // g_RuntimeGlobalContext.m_RenderSystem->GetTaskManager()->AddTask(Task(std::bind(&Device::DeleteCommandListAsync, this, std::placeholders::_1), reinterpret_cast<void*>(pInflightPacket)));
 
         m_pActiveCommandList = nullptr;
     }
